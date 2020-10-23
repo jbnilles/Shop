@@ -1,5 +1,5 @@
 using Microsoft.EntityFrameworkCore;
-namespace Treats.Models
+namespace Shop.Models
 {
     public class TreatContext : DbContext
     {

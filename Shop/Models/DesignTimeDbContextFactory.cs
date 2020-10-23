@@ -2,7 +2,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Design;
 using Microsoft.Extensions.Configuration;
 using System.IO;
-namespace Treats.Models
+namespace Shop.Models
 {
   public class DesignTimeDbContextFactory
   {

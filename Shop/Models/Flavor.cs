@@ -1,5 +1,5 @@
 using System.Collections.Generic;
-namespace Treats.Models
+namespace Shop.Models
 {
     public class Flavor
     {

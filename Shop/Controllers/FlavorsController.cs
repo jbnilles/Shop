@@ -4,8 +4,8 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using System.Linq;
 using Microsoft.AspNetCore.Mvc;
-using Treats.Models;
-namespace Treats.Controllers
+using Shop.Models;
+namespace Shop.Controllers
 {
     public class FlavorsController : Controller
     {

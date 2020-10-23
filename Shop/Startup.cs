@@ -9,9 +9,9 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
-using Treats.Models;
+using Shop.Models;
 
-namespace Treats
+namespace Shop
 {
     public class Startup
     {
