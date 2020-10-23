@@ -1,0 +1,57 @@
+﻿div#header {
+  position:fixed;
+  top:0px;
+  left:0px;
+  width:100%;
+  color:#CCC;
+  background:#333;
+  padding:8px;
+  
+  
+}
+div#footer {
+  position:fixed;
+  bottom:0px;
+  left:0px;
+  width:100%;
+  color:#CCC;
+  background:#333;
+  padding:18px;
+  font-size: xx-small;
+}
+.jumbotron {
+  text-align: center;
+  background-color: inherit;
+}
+.container {
+  background-color: #dcfff8;
+  padding-bottom: 50px;
+  padding-top: 25px;
+  margin-top:  50px;
+}
+body {
+  background-color: #dcfff8;
+}
+.card {
+  text-align: center;
+  background-color: cornsilk;
+  margin-bottom: 25px;
+}
+form{
+  background-color: inherit;
+}
+img {
+    position: fixed;
+    left: 50px;
+    border: none;
+}
+ul {
+  list-style: none;
+}
+#search-bar {
+  display: block;
+  float: right;
+}
+.start-hidden{
+  display: none;
+}

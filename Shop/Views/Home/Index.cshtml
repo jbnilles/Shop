@@ -1,8 +1,23 @@
 ﻿@{
-    ViewData["Title"] = "Home Page";
+  Layout = "_Layout";
 }
+@using Shop.Models;
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+<div class="container">
+  <div class="jumbotron">
+    <h1 class="display-4">Welcome to the Shop</h1>
+  </div>
+  <div id="landing-page">
+    <div class="card">
+      <div class="card-body">
+        <p>This program is design to help </p>
+        <button class="btn btn-outline-info" onclick="window.location.href='/treats';">Treats Page</button>
+        <button class="btn btn-outline-info" onclick="window.location.href='/flavors';">Flavors Page</button>
+      </div>
+    </div>
+    
+  </div>
+  
+  @Html.Partial("Header")
+  @Html.Partial("Footer")
 </div>
