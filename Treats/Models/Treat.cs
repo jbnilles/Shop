@@ -3,7 +3,7 @@ namespace Treats.Models
 {
     public class Treat
     {
-         public Treat()
+        public Treat()
         {
             this.TreatFlavor = new HashSet<TreatFlavor>();
         }
@@ -11,6 +11,6 @@ namespace Treats.Models
         public string Name {get; set;}
         public string Description {get; set;}
         public virtual ICollection<TreatFlavor> TreatFlavor{get; set;}
-    }
+    
     }
 }
