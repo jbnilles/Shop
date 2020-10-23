@@ -1,0 +1,32 @@
+ @{
+  Layout = "_Layout";
+}
+@using Treats.Models;
+<div class="container">
+  <div class="jumbotron">
+    <h1 class="display-4">Machines</h1>
+  </div>
+  <div class="card">
+    <div class="card-header"> 
+      <h5>List of Flavors</h5>
+    </div>
+    <div class="card-body">
+      @if(Model.Count == 0)
+      {
+        <h6>There are no Flavors at this time.</h6>
+      }
+      <ul>
+        @foreach(Flavor flavor in Model)
+        {
+          <li>@flavor.Name | @Html.ActionLink("details","details", new {id = flavor.FlavorId})</li>
+        }
+      </ul>
+      <div>
+        <button class="btn btn-info" onclick="window.location.href='/flavors/create';">New Flavor</button>
+        <button class="btn btn-info" onclick="window.location.href='/';">Home</button>
+      </div>
+    </div>
+  </div>
+</div>
+@Html.Partial("Header")
+@Html.Partial("Footer")

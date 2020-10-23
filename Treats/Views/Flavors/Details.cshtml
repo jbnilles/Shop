@@ -1,0 +1,58 @@
+@{
+  Layout = "_Layout";
+}
+@using Treats.Models;
+<div class="container">
+  <div class="jumbotron">
+    <h1 class="display-4">
+      Flavor Details
+    </h1>
+    <button class="btn btn-outline-info" onclick="window.location.href='/flavors';">View all Flavors</button>
+    
+
+
+
+  </div>
+  <div class="row">
+    <div class="col-6">
+      <div class="card">
+        <div class="card-header">
+          <h5>Treats</h5>
+        </div>
+        <div class="card-body">
+          @if(Model.TreatFlavor.Count == 0)
+          {
+            <p>@Model.Name has no Treats .</p>
+          }
+          <ul>
+            @foreach (TreatFlavor treatFlavor in @Model.TreatFlavor)
+            {
+                <li>@Html.ActionLink(treatFlavor.Treat.Name,"details","treats", new {id = treatFlavor.TreatId}) | @Html.ActionLink("Remove","removeTreat", new {id = treatFlavor.TreatFlavorId}) </li>
+            }
+          </ul>
+          <div>
+            <button class="btn btn-info" onclick="window.location.href='/flavors/addTreat/@Model.FlavorId';">Link an Treat</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-6">
+      <div class="card">
+        <div class="card-header">
+          <h5>Details</h5>
+        </div>
+        <div class="card-body">
+          <h5>Name: @Model.Name</h5>
+          <h5>Description: @Model.Description</h5>
+          <div>
+            <button class="btn btn-info" onclick="window.location.href='/flavors/edit/@Model.FlavorId';">Edit</button>
+            <button class="btn btn-info" onclick="window.location.href='/flavors/delete/@Model.FlavorId';">Delete</button></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+   @Html.Partial("Header")
+  @Html.Partial("Footer") 
+
+</div>

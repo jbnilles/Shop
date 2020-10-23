@@ -1,0 +1,32 @@
+@{
+  Layout = "_Layout";
+}
+
+@model Treats.Models.Flavor
+<div class="container">
+  <div class="jumbotron">
+    <h1 class="display-4">
+      Edit @Model.Name
+    </h1>
+
+  </div>
+  <div class="card card-body">
+
+    @using (Html.BeginForm())
+    {
+      @Html.HiddenFor(model => model.FlavorId)
+
+      @Html.LabelFor(model => model.Name)
+      @Html.EditorFor(model => model.Name, new { @required = "required"})
+      @Html.LabelFor(model => model.Description)
+      @Html.EditorFor(model => model.Description)
+
+      
+      <input type="submit" value="Edit Flavor" class="btn btn-outline-dark" />
+      <button class="btn btn-outline-dark" type="button" onclick="window.location.href='/flavors/details/@Model.FlavorId';">Cancel</button>
+    }
+  </div>
+</div>
+  @Html.Partial("Header")
+  @Html.Partial("Footer")
+
