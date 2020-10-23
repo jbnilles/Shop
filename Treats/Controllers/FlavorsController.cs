@@ -7,16 +7,16 @@ using Microsoft.AspNetCore.Mvc;
 using Treats.Models;
 namespace Treats.Controllers
 {
-    public class TreatsController : Controller
+    public class FlavorsController : Controller
     {
         private readonly TreatContext _db;
-        public TreatsController ( TreatContext db) 
+        public FlavorsController( TreatContext db)
         {
             _db = db;
         }
         public ActionResult Index()
         {
-            List<Treat> model = _db.Treats.OrderBy(x => x.Name).ToList();
+            List<Flavor> model = _db.Flavors.OrderBy(x => x.Name).ToList();
             return View(model);
         }
         public ActionResult Create()
@@ -24,40 +24,40 @@ namespace Treats.Controllers
             return View();
         }
         [HttpPost]
-        public ActionResult Create(Treat treat)
+        public ActionResult Create(Flavor flavor)
         {
-            _db.Treats.Add(treat);
+            _db.Flavors.Add(flavor);
             _db.SaveChanges();
             return RedirectToAction("Index");
         }
         public ActionResult Details(int id)
         {
-            Treat model = _db.Treats.FirstOrDefault(e => e.TreatId == id);
+            Flavor model = _db.Flavors.FirstOrDefault(e => e.FlavorId == id);
             return View(model);
         }
         public ActionResult Delete(int id)
         {
-            Treat thisTreat = _db.Treats.FirstOrDefault(x => x.TreatId == id);
-            return View(thisTreat);
+            Flavor thisFlavor = _db.Flavors.FirstOrDefault(x => x.FlavorId == id);
+            return View(thisFlavor);
         }
 
         [HttpPost, ActionName("Delete")]
         public ActionResult DeleteConfirmed(int id)
         {
-            Treat thisTreat = _db.Treats.FirstOrDefault(x => x.TreatId == id);
-            _db.Treats.Remove(thisTreat);
+            Flavor thisFlavor = _db.Flavors.FirstOrDefault(x => x.FlavorId == id);
+            _db.Flavors.Remove(thisFlavor);
             _db.SaveChanges();
             return RedirectToAction("Index");
         }
         public ActionResult Edit(int id)
         {                    
-            Treat thisMachine = _db.Treats.FirstOrDefault(x => x.TreatId == id);
-            return View(thisMachine);
+            Flavor thisFlavor = _db.Flavors.FirstOrDefault(x => x.FlavorId == id);
+            return View(thisFlavor);
         }
         [HttpPost]
-        public ActionResult Edit(Treat treat)
+        public ActionResult Edit(Flavor flavor)
         {
-            _db.Entry(treat).State = EntityState.Modified;
+            _db.Entry(flavor).State = EntityState.Modified;
             _db.SaveChanges();
             return RedirectToAction("Index");
         }
