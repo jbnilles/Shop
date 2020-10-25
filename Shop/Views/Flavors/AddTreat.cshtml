@@ -1,0 +1,30 @@
+@{
+  Layout = "_Layout";
+}
+
+@model Shop.Models.Flavor;
+<div class="container">
+  <div class="jumbotron">
+    <h1 class="display-4">Add a Treat</h1>
+  </div>
+
+  <div class="card card-body">
+    <h4>Add a Treat to @Html.DisplayFor(model => model.Name):</h4>
+
+    @using (Html.BeginForm())
+    {
+        @Html.HiddenFor(model => model.FlavorId)
+
+        @Html.Label("Select Treat")
+        @Html.DropDownList("TreatId")
+
+        <input class="btn btn-outline-dark" type="submit" value="Add" />
+        <button class="btn btn-outline-dark" type="button" onclick="window.location.href='/flavors/details/@Model.FlavorId';">Cancel</button>
+    }
+  </div>
+
+
+</div>
+  @Html.Partial("Header")
+  @Html.Partial("Footer")
+

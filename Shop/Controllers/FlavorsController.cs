@@ -61,5 +61,33 @@ namespace Shop.Controllers
             _db.SaveChanges();
             return RedirectToAction("Index");
         }
+        public ActionResult AddTreat(int id)
+        {
+            Flavor thisFlavor = _db.Flavors.FirstOrDefault(s => s.FlavorId == id);
+            ViewBag.TreatId = new SelectList(_db.Treats, "TreatId", "Name");
+            return View(thisFlavor);
+        }
+        [HttpPost]
+        public ActionResult AddTreat(TreatFlavor treatFlavor)
+        {
+            if (treatFlavor.TreatId != 0)
+            {
+                if (_db.TreatFlavors.Where(x => x.TreatId == treatFlavor.TreatId && x.FlavorId == treatFlavor.FlavorId).ToHashSet().Count == 0)
+                {
+                _db.TreatFlavors.Add(treatFlavor);
+                }
+            }
+            _db.SaveChanges();
+            return RedirectToAction("details",new {id = treatFlavor.FlavorId});
+        }
+        
+        public ActionResult RemoveTreat (int id)
+        {
+            TreatFlavor joinEntry = _db.TreatFlavors.FirstOrDefault(x => x.TreatFlavorId == id);
+            int flavorId = joinEntry.FlavorId;
+            _db.TreatFlavors.Remove(joinEntry);
+            _db.SaveChanges();
+            return RedirectToAction("details", "flavors", new {id = flavorId});
+        }
     }
 }
