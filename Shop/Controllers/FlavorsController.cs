@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Mvc.Rendering;
@@ -11,7 +10,6 @@ using System.Security.Claims;
 using Shop.Models;
 namespace Shop.Controllers
 {
-    
     public class FlavorsController : Controller
     {
         private readonly TreatContext _db;
@@ -21,11 +19,9 @@ namespace Shop.Controllers
             _db = db;
             _userManager = userManager;
         }
-        public  ActionResult Index() //async Task<ActionResult>
+        public  ActionResult Index()
         {
-            //var userId = this.User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
-           // var currentUser = await _userManager.FindByIdAsync(userId);
-            List<Flavor> model = _db.Flavors.OrderBy(x => x.Name).ToList(); //.Where(x => x.User.Id == currentUser.Id)
+            List<Flavor> model = _db.Flavors.OrderBy(x => x.Name).ToList();
             return View(model);
         }
         [Authorize]
@@ -54,7 +50,6 @@ namespace Shop.Controllers
             Flavor thisFlavor = _db.Flavors.FirstOrDefault(x => x.FlavorId == id);
             return View(thisFlavor);
         }
-
         [HttpPost, ActionName("Delete")]
         public ActionResult DeleteConfirmed(int id)
         {

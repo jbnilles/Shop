@@ -2,35 +2,30 @@
   Layout = "_Layout";
 }
 <div class="container">
-  <div class="jumbotron">
-    <h1 class="display-4">
-      Account Details
-    </h1>
-  </div>
+    <div class="jumbotron">
+        <h1 class="display-4">
+            Account Details
+        </h1>
+    </div>
     <div class="card">
         <div class="card-header">
-          <h5>Account</h5>
+            <h5>Account</h5>
         </div>
         <div class="card-body">
-@using System.Security.Claims
-
-
-
-@if (User.Identity.IsAuthenticated)
-{
-    <p>Hello @User.Identity.Name!</p>
-    @using (Html.BeginForm("LogOff", "Account"))
-    {
-        <button class="btn btn-outline-dark" type="submit">Log Out</button>
-    }
-}
-else
-{
-    <button class="btn btn-outline-dark" type="button" onclick="window.location.href='/account/register';">Register</button>
-    <button class="btn btn-outline-dark" type="button" onclick="window.location.href='/account/login';">Log In</button>
-    <button class="btn btn-outline-dark" type="button" onclick="window.location.href='/';">Home</button>
-    
-}
+            @if (User.Identity.IsAuthenticated)
+            {
+                <p>Hello @User.Identity.Name!</p>
+                @using (Html.BeginForm("LogOff", "Account"))
+                {
+                    <button class="btn btn-outline-dark" type="submit">Log Out</button>
+                }
+            }
+            else
+            {
+                <button class="btn btn-outline-dark" type="button" onclick="window.location.href='/account/register';">Register</button>
+                <button class="btn btn-outline-dark" type="button" onclick="window.location.href='/account/login';">Log In</button>
+                <button class="btn btn-outline-dark" type="button" onclick="window.location.href='/';">Home</button>
+            }
         </div>
     </div>
 </div>

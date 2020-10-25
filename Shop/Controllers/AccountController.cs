@@ -61,7 +61,6 @@ namespace Shop.Controllers
             else
             {
                 return View();
-            
             }
         }
         [HttpPost]

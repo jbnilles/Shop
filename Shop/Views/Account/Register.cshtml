@@ -7,35 +7,35 @@
       Account Register
     </h1>
   </div>
-    <div class="card">
-        <div class="card-header">
-          <h2>Register a new user</h2>
-        </div>
-        <div class="card-body">
-          @using Shop.ViewModels
-
-@model RegisterViewModel
-
-@using (Html.BeginForm("Register", "Account", FormMethod.Post))
-{
-    @Html.LabelFor(user => user.UserName)
-    @Html.TextBoxFor(user=> user.UserName)
-
-    @Html.LabelFor(user => user.Email)
-    @Html.TextBoxFor(user=> user.Email)
-
-    @Html.LabelFor(user=> user.Password)
-    @Html.PasswordFor(user=> user.Password)
-
-    @Html.LabelFor(user=> user.ConfirmPassword)
-    @Html.PasswordFor(user=> user.ConfirmPassword)
-
-    <button class="btn btn-outline-dark" type="submit">Register</button>
-}
-        </div>
+  <div class="card">
+    <div class="card-header">
+      <h2>Register a new user</h2>
     </div>
+    <div class="card-body">
+      @using Shop.ViewModels
+
+      @model RegisterViewModel
+
+      @using (Html.BeginForm("Register", "Account", FormMethod.Post))
+      {
+        @Html.LabelFor(user => user.UserName)
+        @Html.TextBoxFor(user=> user.UserName)
+
+        @Html.LabelFor(user => user.Email)
+        @Html.TextBoxFor(user=> user.Email)
+
+        @Html.LabelFor(user=> user.Password)
+        @Html.PasswordFor(user=> user.Password)
+
+        @Html.LabelFor(user=> user.ConfirmPassword)
+        @Html.PasswordFor(user=> user.ConfirmPassword)
+
+        <button class="btn btn-outline-dark" type="submit">Register</button>
+      }
+    </div>
+  </div>
 </div>
 
-  @Html.Partial("Header")
-  @Html.Partial("Footer")
+@Html.Partial("Header")
+@Html.Partial("Footer")
 

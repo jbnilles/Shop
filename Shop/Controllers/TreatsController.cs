@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Mvc.Rendering;
@@ -11,7 +10,6 @@ using System.Security.Claims;
 using Shop.Models;
 namespace Shop.Controllers
 {
-    
     public class TreatsController : Controller
     {
         private readonly TreatContext _db;
@@ -21,11 +19,9 @@ namespace Shop.Controllers
             _db = db;
             _userManager = userManager;
         }
-        public  ActionResult Index() //async Task<ActionResult>
+        public  ActionResult Index()
         {
-            //var userId = this.User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
-           // var currentUser = await _userManager.FindByIdAsync(userId);
-            List<Treat> model = _db.Treats.OrderBy(x => x.Name).ToList(); //Where(x => x.User.Id == currentUser.Id).
+            List<Treat> model = _db.Treats.OrderBy(x => x.Name).ToList();
             return View(model);
         }
         [Authorize]
