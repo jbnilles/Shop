@@ -1,22 +1,38 @@
 @{
   Layout = "_Layout";
 }
-
+<div class="container">
+  <div class="jumbotron">
+    <h1 class="display-4">
+      Account Details
+    </h1>
+  </div>
+    <div class="card">
+        <div class="card-header">
+          <h5>Account</h5>
+        </div>
+        <div class="card-body">
 @using System.Security.Claims
 
-<h2>Authentication with Identity</h2>
-<hr />
+
+
 @if (User.Identity.IsAuthenticated)
 {
     <p>Hello @User.Identity.Name!</p>
     @using (Html.BeginForm("LogOff", "Account"))
     {
-        <input type="submit" class="btn btn-default" value="Log out" />
+        <button class="btn btn-outline-dark" type="submit">Log Out</button>
     }
 }
 else
 {
-    <p>@Html.ActionLink("Register", "Register")</p>
-    <p>@Html.ActionLink("Log in", "Login")</p>
-    <p>@Html.ActionLink("Home", "Index", "Home")</p>
+    <button class="btn btn-outline-dark" type="button" onclick="window.location.href='/account/register';">Register</button>
+    <button class="btn btn-outline-dark" type="button" onclick="window.location.href='/account/login';">Log In</button>
+    <button class="btn btn-outline-dark" type="button" onclick="window.location.href='/';">Home</button>
+    
 }
+        </div>
+    </div>
+</div>
+  @Html.Partial("Header")
+  @Html.Partial("Footer")

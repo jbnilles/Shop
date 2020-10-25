@@ -1,13 +1,21 @@
 @{
   Layout = "_Layout";
 }
-
-@using Shop.ViewModels
+<div class="container">
+  <div class="jumbotron">
+    <h1 class="display-4">
+      Account Register
+    </h1>
+  </div>
+    <div class="card">
+        <div class="card-header">
+          <h2>Register a new user</h2>
+        </div>
+        <div class="card-body">
+          @using Shop.ViewModels
 
 @model RegisterViewModel
 
-<h2>Register a new user</h2>
-<hr />
 @using (Html.BeginForm("Register", "Account", FormMethod.Post))
 {
     @Html.LabelFor(user => user.UserName)
@@ -22,5 +30,12 @@
     @Html.LabelFor(user=> user.ConfirmPassword)
     @Html.PasswordFor(user=> user.ConfirmPassword)
 
-    <input type="submit" value="Register" />
+    <button class="btn btn-outline-dark" type="submit">Register</button>
 }
+        </div>
+    </div>
+</div>
+
+  @Html.Partial("Header")
+  @Html.Partial("Footer")
+

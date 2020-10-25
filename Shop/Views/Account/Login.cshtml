@@ -1,20 +1,40 @@
 @{
   Layout = "_Layout";
 }
-
-@using Shop.ViewModels
+<div class="container">
+  <div class="jumbotron">
+    <h1 class="display-4">
+      Account Register
+    </h1>
+  </div>
+    <div class="card">
+        <div class="card-header">
+          <h2>Log in with your account</h2>
+        </div>
+        <div class="card-body">
+          @using Shop.ViewModels
 
 @model LoginViewModel
 
-<h2>Log in with your account</h2>
-<hr />
+
+
 @using (Html.BeginForm())
 {
-    @Html.LabelFor(m => m.Email)
-    @Html.TextBoxFor(m => m.Email)
+    @Html.LabelFor(m => m.UserName)
+    @Html.TextBoxFor(m => m.UserName)
 
     @Html.LabelFor(m => m.Password)
     @Html.PasswordFor(m => m.Password)
 
-    <input type="submit" value="Log in" class="btn btn-default" />
+    <button class="btn btn-outline-dark" type="submit">Log In</button>
 }
+        </div>
+    </div>
+</div>
+
+  @Html.Partial("Header")
+  @Html.Partial("Footer")
+
+
+
+
