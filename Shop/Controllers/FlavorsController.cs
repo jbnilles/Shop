@@ -4,19 +4,28 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using System.Linq;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
+using System.Threading.Tasks;
+using System.Security.Claims;
 using Shop.Models;
 namespace Shop.Controllers
 {
+    [Authorize]
     public class FlavorsController : Controller
     {
         private readonly TreatContext _db;
-        public FlavorsController( TreatContext db)
+        private readonly UserManager<ApplicationUser> _userManager;
+        public FlavorsController( UserManager<ApplicationUser> userManager, TreatContext db)
         {
             _db = db;
+            _userManager = userManager;
         }
-        public ActionResult Index()
+        public async Task<ActionResult> Index()
         {
-            List<Flavor> model = _db.Flavors.OrderBy(x => x.Name).ToList();
+            var userId = this.User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+            var currentUser = await _userManager.FindByIdAsync(userId);
+            List<Flavor> model = _db.Flavors.Where(x => x.User.Id == currentUser.Id).OrderBy(x => x.Name).ToList();
             return View(model);
         }
         public ActionResult Create()
@@ -24,8 +33,11 @@ namespace Shop.Controllers
             return View();
         }
         [HttpPost]
-        public ActionResult Create(Flavor flavor)
+        public async Task<ActionResult> Create(Flavor flavor)
         {
+            var userId = this.User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+            var currentUser = await _userManager.FindByIdAsync(userId);
+            flavor.User = currentUser;
             _db.Flavors.Add(flavor);
             _db.SaveChanges();
             return RedirectToAction("Index");

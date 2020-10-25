@@ -4,19 +4,28 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using System.Linq;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
+using System.Threading.Tasks;
+using System.Security.Claims;
 using Shop.Models;
 namespace Shop.Controllers
 {
+    [Authorize]
     public class TreatsController : Controller
     {
         private readonly TreatContext _db;
-        public TreatsController ( TreatContext db) 
+        private readonly UserManager<ApplicationUser> _userManager;
+        public TreatsController ( UserManager<ApplicationUser> userManager, TreatContext db) 
         {
             _db = db;
+            _userManager = userManager;
         }
-        public ActionResult Index()
+        public async Task<ActionResult> Index()
         {
-            List<Treat> model = _db.Treats.OrderBy(x => x.Name).ToList();
+            var userId = this.User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+            var currentUser = await _userManager.FindByIdAsync(userId);
+            List<Treat> model = _db.Treats.Where(x => x.User.Id == currentUser.Id).OrderBy(x => x.Name).ToList();
             return View(model);
         }
         public ActionResult Create()
@@ -24,8 +33,11 @@ namespace Shop.Controllers
             return View();
         }
         [HttpPost]
-        public ActionResult Create(Treat treat)
+        public async Task<ActionResult> Create(Treat treat)
         {
+            var userId = this.User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+            var currentUser = await _userManager.FindByIdAsync(userId);
+            treat.User = currentUser;
             _db.Treats.Add(treat);
             _db.SaveChanges();
             return RedirectToAction("Index");
