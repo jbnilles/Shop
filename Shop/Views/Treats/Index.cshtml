@@ -22,7 +22,11 @@
         }
       </ul>
       <div>
+        @if(@User.Identity.IsAuthenticated)
+        {
         <button class="btn btn-info" onclick="window.location.href='/treats/create';">New Treats</button>
+
+        }
         <button class="btn btn-info" onclick="window.location.href='/';">Home</button>
       </div>
     </div>

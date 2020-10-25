@@ -11,7 +11,7 @@ using System.Security.Claims;
 using Shop.Models;
 namespace Shop.Controllers
 {
-    [Authorize]
+    
     public class TreatsController : Controller
     {
         private readonly TreatContext _db;
@@ -21,13 +21,14 @@ namespace Shop.Controllers
             _db = db;
             _userManager = userManager;
         }
-        public async Task<ActionResult> Index()
+        public  ActionResult Index() //async Task<ActionResult>
         {
-            var userId = this.User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
-            var currentUser = await _userManager.FindByIdAsync(userId);
-            List<Treat> model = _db.Treats.Where(x => x.User.Id == currentUser.Id).OrderBy(x => x.Name).ToList();
+            //var userId = this.User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+           // var currentUser = await _userManager.FindByIdAsync(userId);
+            List<Treat> model = _db.Treats.OrderBy(x => x.Name).ToList(); //Where(x => x.User.Id == currentUser.Id).
             return View(model);
         }
+        [Authorize]
         public ActionResult Create()
         {
             return View();
@@ -47,6 +48,7 @@ namespace Shop.Controllers
             Treat model = _db.Treats.FirstOrDefault(e => e.TreatId == id);
             return View(model);
         }
+        [Authorize]
         public ActionResult Delete(int id)
         {
             Treat thisTreat = _db.Treats.FirstOrDefault(x => x.TreatId == id);
@@ -61,6 +63,7 @@ namespace Shop.Controllers
             _db.SaveChanges();
             return RedirectToAction("Index");
         }
+        [Authorize]
         public ActionResult Edit(int id)
         {                    
             Treat thisMachine = _db.Treats.FirstOrDefault(x => x.TreatId == id);
@@ -73,6 +76,7 @@ namespace Shop.Controllers
             _db.SaveChanges();
             return RedirectToAction("Index");
         }
+        [Authorize]
         public ActionResult AddFlavor(int id)
         {
             Treat thisTreat = _db.Treats.FirstOrDefault(s => s.TreatId == id);
@@ -92,7 +96,7 @@ namespace Shop.Controllers
             _db.SaveChanges();
             return RedirectToAction("details", new {id = treatFlavor.TreatId});
         }
-        
+        [Authorize]
         public ActionResult RemoveFlavor (int id)
         {
             TreatFlavor joinEntry = _db.TreatFlavors.FirstOrDefault(x => x.TreatFlavorId == id);

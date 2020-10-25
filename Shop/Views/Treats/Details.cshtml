@@ -27,11 +27,23 @@
           <ul>
             @foreach (TreatFlavor treatFlavor in @Model.TreatFlavor)
             {
+              @if(@User.Identity.IsAuthenticated)
+              {
                 <li>@Html.ActionLink(treatFlavor.Flavor.Name,"details","flavors", new {id = treatFlavor.FlavorId}) | @Html.ActionLink("Remove","removeFlavor", new {id = treatFlavor.TreatFlavorId}) </li>
+              }
+              else
+              {
+                <li>@Html.ActionLink(treatFlavor.Flavor.Name,"details","flavors", new {id = treatFlavor.FlavorId})</li>
+              }
+                
             }
           </ul>
           <div>
-            <button class="btn btn-info" onclick="window.location.href='/treats/addFlavor/@Model.TreatId';">Link an Flavor</button>
+            @if(@User.Identity.IsAuthenticated)
+            {
+              <button class="btn btn-info" onclick="window.location.href='/treats/addFlavor/@Model.TreatId';">Link an Flavor</button>
+            }
+            
           </div>
         </div>
       </div>
@@ -45,8 +57,12 @@
           <h5>Name: @Model.Name</h5>
           <h5>Description: @Model.Description</h5>
           <div>
-            <button class="btn btn-info" onclick="window.location.href='/Treats/edit/@Model.TreatId';">Edit</button>
-            <button class="btn btn-info" onclick="window.location.href='/treats/delete/@Model.TreatId';">Delete</button></div>
+            @if(@User.Identity.IsAuthenticated)
+            {
+              <button class="btn btn-info" onclick="window.location.href='/Treats/edit/@Model.TreatId';">Edit</button>
+              <button class="btn btn-info" onclick="window.location.href='/treats/delete/@Model.TreatId';">Delete</button>
+            }
+            </div>
         </div>
       </div>
     </div>
